@@ -243,20 +243,15 @@ audio.addEventListener("timeupdate", () => {
 // creates playlist
 const initializePlaylist = () => {
   for (let i in songsList) {
-    playlistSongs.innerHTML += `
+    let songItem = `
     <li class="playlistSong" onclick='setSong(${i})'>
-      <div class="playlist-image-container">
-        <img src="${songsList[i].image}" />
+      <div class="row">
+        <span>${songsList[i].name} -  ${songsList[i].artist}</span>
+        <p>Album Title</p>
       </div>
-      <div class="playlist-song-details">
-        <span id="playlist-song-name">
-          ${songsList[i].name}
-        </span>
-        <span id="playlist-song-artist-album">
-          ${songsList[i].artist}
-        </span>
-      </div>
+      <span class="audio-duration">3:40</span>
     </li>`;
+    playlistSongs.innerHTML += songItem;
   }
 };
 

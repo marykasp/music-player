@@ -17,8 +17,14 @@
   </head>
   <body>
     <div class="music-player">
-      <button id="playlist"><i class="fa-solid fa-angle-down"></i></button>
-      <img id="song-image" src="./img/make-me-move.jpg"" />
+      <div class="top-bar">
+        <button id="playlist"><i class="fa-solid fa-angle-down"></i></button>
+        <span>Now Playing</span>
+        <button><i class="fa-solid fa-ellipsis"></i></button>
+      </div>
+      <div class="img-area">
+        <img id="song-image" src="./img/make-me-move.jpg"" />
+      </div>
       <div class="song-details">
         <p id="song-name">Make Me Move</p>
         <p id="song-artist">Culture Code</p>
@@ -51,11 +57,23 @@
         <span id="current-time">0:00</span>
         <span id="max-duration">0:00</span>
       </div>
-      <div id="playlist-container" class="hide">
-        <button id="close-button">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-        <ul id="playlist-songs"></ul>
+      <div id="playlist-container">
+        <div class="header">
+          <div class="row">
+            <i class="fa-solid fa-music"></i>
+            <span>Music List</span>
+          </div>
+          <i class="fa-solid fa-xmark" id="close-button"></i>
+        </div>
+        <ul id="playlist-songs">
+          <li>
+            <div class="row">
+              <span>Song Title - Artist</span>
+              <p>Audio Library</p>
+            </div>
+            <span class="audio-duration">3:40</span>
+          </li>
+        </ul>
       </div>
     </div>
 
