@@ -122,19 +122,6 @@ const pauseAudio = () => {
   playButton.classList.remove("hide");
 };
 
-// Function to toggle repeat mode
-const repeatAudio = () => {
-  if (repeatButton.classList.contains("active")) {
-    repeatButton.classList.remove("active");
-    audio.loop = false;
-    console.log("repeat off");
-  } else {
-    repeatButton.classList.add("active");
-    audio.loop = true;
-    console.log("repeat on");
-  }
-};
-
 // Function to play next song
 const nextSong = () => {
   // if loop is true then continue in normal order
@@ -186,31 +173,71 @@ const shuffleSongs = () => {
   }
 };
 
-// shuffle songs
-shuffleButton.addEventListener("click", shuffleSongs);
+// Function to toggle repeat mode
+const repeatAudio = () => {
+  if (repeatButton.classList.contains("active")) {
+    repeatButton.classList.remove("active");
+    audio.loop = false;
+    console.log("repeat off");
+  } else {
+    repeatButton.classList.add("active");
+    audio.loop = true;
+    console.log("repeat on");
+  }
+};
 
 // Player options event listeners
 playButton.addEventListener("click", playAudio);
 pauseButton.addEventListener("click", pauseAudio);
 nextButton.addEventListener("click", nextSong);
 prevButton.addEventListener("click", previousSong);
+
+// shuffle songs
+shuffleButton.addEventListener("click", shuffleSongs);
+// repeat song
 repeatButton.addEventListener("click", repeatAudio);
 
-// if user clicks on progress bar
+// open playlist container
+playlistButton.addEventListener("click", () => {
+  playlistContainer.classList.remove("hide");
+});
+// close playlist container
+closeButton.addEventListener("click", () => {
+  playlistContainer.classList.add("hide");
+});
 
+// if user clicks on progress bar
 // determine if have a touch device or mouse - sets deviceType variable
 isTouchDevice();
 progressBar.addEventListener(events[deviceType].click, (event) => {
   // start of progressBar
-  let coordStart = progressBar.getBoundingClientRect();
-  left;
+  let coordStart = progressBar.getBoundingClientRect().left;
   // mouse click position
   let coordEnd = !isTouchDevice() ? event.clientX : event.touches[0].clientX;
-  let progress = (coordEnd - coordStart) / progressBar;
-  offsetWidth;
+  let progress = (coordEnd - coordStart) / progressBar.offsetWidth;
 
   // set width to progress
-  currentProgress.style.width = progress;
+  currentProgress.style.width = progress * 100 + "%";
+
+  // set time
+  audio.currentTime = progress * audio.duration;
+
+  // play
+  audio.play();
+  pauseButton.classList.remove("hide");
+  playButton.classList.add("hide");
+});
+
+// update progress bar every second
+setInterval(() => {
+  currentTimeRef.innerHTML = timeFormatter(audio.currentTime);
+  currentProgress.style.width =
+    (audio.currentTime / audio.duration.toFixed(2)) * 100 + "%";
+});
+
+// update time
+audio.addEventListener("timeupdate", () => {
+  currentTimeRef.innerText = timeFormatter(audio.currentTime);
 });
 
 window.onload = () => {
