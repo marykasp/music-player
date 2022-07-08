@@ -27,6 +27,7 @@ let loop = true;
 const songsList = [
   {
     name: "Make Me Move",
+    album: "NCS",
     link: "../utils/make-me-move.mp3",
     artist: "Culture Code",
     image: "../img/make-me-move.jpg",
@@ -34,6 +35,7 @@ const songsList = [
   },
   {
     name: "Where We Started",
+    album: "NCS",
     link: "../utils/where-we-started.mp3",
     artist: "Lost Sky",
     image: "../img/where-we-started.jpg",
@@ -41,6 +43,7 @@ const songsList = [
   },
   {
     name: "On & On",
+    album: "NCS",
     link: "../utils/on-on.mp3",
     artist: "Cartoon",
     image: "../img/on-on.jpg",
@@ -48,6 +51,7 @@ const songsList = [
   },
   {
     name: "Throne",
+    album: "NCS",
     link: "../utils/throne.mp3",
     artist: "Rival",
     image: "../img/throne.jpg",
@@ -55,6 +59,7 @@ const songsList = [
   },
   {
     name: "Need You Now",
+    album: "NCS",
     link: "../utils/need-you-now.mp3",
     artist: "Venemy",
     image: "../img/need-you-now.jpg",
@@ -105,14 +110,14 @@ const setSong = (arrayIndex) => {
   // playlistContainer.classList.add("hide");
 
   // add playing class to clicked item - iterate over list
-  // document.querySelectorAll(".playlistSong").forEach((item) => {
-  //   if (item.getAttribute("li-index") == arrayIndex) {
-  //     // if the list item index matches the index passed in add playing class
-  //     item.classList.add("playing");
-  //   } else {
-  //     item.classList.remove("playing");
-  //   }
-  // });
+  document.querySelectorAll(".playlistSong").forEach((item) => {
+    if (item.getAttribute("li-index") == arrayIndex) {
+      // if the list item index matches the index passed in add playing class
+      item.classList.add("playing");
+    } else {
+      item.classList.remove("playing");
+    }
+  });
 
   // destructure all the values from the song objec
   let { name, link, artist, image } = songsList[arrayIndex];
@@ -260,10 +265,11 @@ audio.addEventListener("timeupdate", () => {
 
 const clicked = (element) => {
   let liIndex = element.getAttribute("li-index");
-  element.classList.add("playing");
   console.log(liIndex);
-  setSong(liIndex);
 
+  // set the song to display to the song clicked on
+  setSong(liIndex);
+  // play the audio of the song
   playAudio();
 };
 
@@ -274,7 +280,7 @@ const initializePlaylist = () => {
     <li class="playlistSong" onclick="clicked(this)"li-index='${i}'>
       <div class="row">
         <span>${songsList[i].name} -  ${songsList[i].artist}</span>
-        <p>Album Title</p>
+        <p>${songsList[i].album}</p>
       </div>
       <span class="audio-duration">${songsList[i].duration}</span>
     </li>`;
