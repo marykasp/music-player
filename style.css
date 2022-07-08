@@ -1,0 +1,57 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Roboto+Mono:ital,wght@0,100;0,200;0,400;0,500;1,300&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(to bottom, #2997e3 50%, #16191e 50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.music-player {
+  font-size: 16px;
+  width: 80vw;
+  max-width: 25rem;
+  padding: 3rem 1.8rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0.6rem 1.2rem 3rem rgba(0, 0, 0, 0.25);
+}
+
+img {
+  width: 100%;
+  margin-top: 1.25rem;
+}
+
+#playlist {
+  float: right;
+}
+
+.song-details {
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+}
+
+.song-details #song-name {
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.song-details #song-artist {
+  font-size: 0.8rem;
+}
+
+.player-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 1.25rem;
+  margin: 1.25rem 0 0.6rem 0;
+}
