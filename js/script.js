@@ -30,30 +30,35 @@ const songsList = [
     link: "../utils/make-me-move.mp3",
     artist: "Culture Code",
     image: "../img/make-me-move.jpg",
+    duration: "3:45",
   },
   {
     name: "Where We Started",
     link: "../utils/where-we-started.mp3",
     artist: "Lost Sky",
     image: "../img/where-we-started.jpg",
+    duration: "3:42",
   },
   {
     name: "On & On",
     link: "../utils/on-on.mp3",
     artist: "Cartoon",
     image: "../img/on-on.jpg",
+    duration: "3:28",
   },
   {
     name: "Throne",
     link: "../utils/throne.mp3",
     artist: "Rival",
     image: "../img/throne.jpg",
+    duration: "3:32",
   },
   {
     name: "Need You Now",
     link: "../utils/need-you-now.mp3",
     artist: "Venemy",
     image: "../img/need-you-now.jpg",
+    duration: "3:06",
   },
 ];
 
@@ -96,6 +101,19 @@ const timeFormatter = (timeInput) => {
 
 // Function to Set Song
 const setSong = (arrayIndex) => {
+  // add hide to playlist container
+  // playlistContainer.classList.add("hide");
+
+  // add playing class to clicked item - iterate over list
+  // document.querySelectorAll(".playlistSong").forEach((item) => {
+  //   if (item.getAttribute("li-index") == arrayIndex) {
+  //     // if the list item index matches the index passed in add playing class
+  //     item.classList.add("playing");
+  //   } else {
+  //     item.classList.remove("playing");
+  //   }
+  // });
+
   // destructure all the values from the song objec
   let { name, link, artist, image } = songsList[arrayIndex];
   audio.src = link;
@@ -240,17 +258,28 @@ audio.addEventListener("timeupdate", () => {
   currentTimeRef.innerText = timeFormatter(audio.currentTime);
 });
 
+const clicked = (element) => {
+  let liIndex = element.getAttribute("li-index");
+  element.classList.add("playing");
+  console.log(liIndex);
+  setSong(liIndex);
+
+  playAudio();
+};
+
 // creates playlist
 const initializePlaylist = () => {
   for (let i in songsList) {
     let songItem = `
-    <li class="playlistSong" onclick='setSong(${i})'>
+    <li class="playlistSong" onclick="clicked(this)"li-index='${i}'>
       <div class="row">
         <span>${songsList[i].name} -  ${songsList[i].artist}</span>
         <p>Album Title</p>
       </div>
-      <span class="audio-duration">3:40</span>
+      <span class="audio-duration">${songsList[i].duration}</span>
     </li>`;
+
+    // songItem.setAttribute("clicked", "clicked(this)");
     playlistSongs.innerHTML += songItem;
   }
 };

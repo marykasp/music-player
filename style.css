@@ -189,6 +189,7 @@ body {
 
 .header .row i {
   cursor: default;
+  color: var(--pink);
 }
 
 .header #close-button {
@@ -232,6 +233,15 @@ body {
 
 ul li .audio-duration {
   font-size: 14px;
+}
+
+button.active i {
+  color: var(--pink);
+}
+
+ul li.playing .row {
+  color: var(--violet);
+  pointer-events: none;
 }
 
 @media screen and (max-width: 450px) {
