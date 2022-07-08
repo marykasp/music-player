@@ -59,6 +59,7 @@ img {
 .music-player button {
   border: none;
   background: transparent;
+  cursor: pointer;
 }
 
 #play,
